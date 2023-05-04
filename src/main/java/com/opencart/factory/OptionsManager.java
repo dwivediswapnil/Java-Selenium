@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+
 public class OptionsManager {
 	Properties prop;
 	private ChromeOptions chromeOptions;
@@ -17,9 +18,12 @@ public class OptionsManager {
 
 	}
 
+
 	// Handle different chrome options like remote==true, headless = true
 	public ChromeOptions getChromeOptions() {
 		chromeOptions = new ChromeOptions();
+		//This line is to fix the exception :java.io.IOException Invalid Status code 403 text Forbidden
+		chromeOptions.addArguments("--remote-allow-origins=*");
 		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 			chromeOptions.setBrowserVersion(prop.getProperty("browser.version"));
 			chromeOptions.setCapability("browsername", prop.getProperty("browser"));
